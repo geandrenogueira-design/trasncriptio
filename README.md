@@ -2,11 +2,16 @@
 
 Aplicativo para transcrever reuniões e organizar sínteses, decisões e temas de estudo no iPad.
 
-## Publicar no Cloudflare Worker existente
+## Publicar no seu Cloudflare Worker
 
-A cada envio à branch `main`, a aba **Actions** do GitHub prepara `dist/` como artefato para download. A publicação no seu Worker existente precisa do nome ou endereço dele para configurar a implantação sem alterar outro projeto por engano.
+O Worker mostrado no painel é **`trasncriptio`**; `wrangler.jsonc` aponta para ele e para a pasta `dist/`. O GitHub compila e disponibiliza essa pasta na aba **Actions**. A publicação no Cloudflare é feita por você.
 
-Se o Worker já estiver conectado ao GitHub via **Cloudflare Workers Builds**, configure o comando de compilação como `npm install --ignore-scripts --no-audit --no-fund && npm run build`. Para configurar o comando de implantação no Worker correto, use o nome dele e uma configuração Wrangler com `assets.directory = "./dist"`. Um Worker que já execute código ou use bindings precisa conservar essas configurações ao adicionar os arquivos estáticos.
+No painel do Worker, em **Settings → Build**, mantenha a branch `main` e configure:
+
+- **Build command:** `npm run build` (já passou no seu log).
+- **Deploy command:** `bunx wrangler deploy` (o ambiente mostrado no seu log tem Bun, mas não encontrou `npx`).
+
+O Wrangler está listado nas dependências de desenvolvimento para que o Cloudflare o instale durante o build. Depois de salvar, execute um novo deploy no painel. O arquivo `wrangler.jsonc` define o nome do Worker e a pasta de arquivos estáticos.
 
 ## Modelo local
 
