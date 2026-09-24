@@ -2,11 +2,11 @@
 
 Aplicativo para transcrever reuniões e organizar sínteses, decisões e temas de estudo no iPad.
 
-## Publicar este repositório
+## Publicar no Cloudflare Worker existente
 
-1. Em **Settings → Pages → Build and deployment → Source**, escolha **GitHub Actions**.
-2. Ao enviar alterações à branch `main`, o fluxo **Publicar Caderno de Reuniões** instala os componentes da IA, cria `dist/` e publica o aplicativo.
-3. O endereço aparece em **Settings → Pages**; no iPad, abra no Safari e use **Compartilhar → Adicionar à Tela de Início**, se desejar.
+A cada envio à branch `main`, a aba **Actions** do GitHub prepara `dist/` como artefato para download. A publicação no seu Worker existente precisa do nome ou endereço dele para configurar a implantação sem alterar outro projeto por engano.
+
+Se o Worker já estiver conectado ao GitHub via **Cloudflare Workers Builds**, configure o comando de compilação como `npm install --ignore-scripts --no-audit --no-fund && npm run build`. Para configurar o comando de implantação no Worker correto, use o nome dele e uma configuração Wrangler com `assets.directory = "./dist"`. Um Worker que já execute código ou use bindings precisa conservar essas configurações ao adicionar os arquivos estáticos.
 
 ## Modelo local
 
