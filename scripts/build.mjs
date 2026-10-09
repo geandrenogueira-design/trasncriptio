@@ -5,6 +5,7 @@ const output = 'dist';
 await mkdir(join(output, 'llm'), { recursive: true });
 for (const [from, to] of [
   ['index.html', 'index.html'],
+  ['_headers', '_headers'],
   ['llm/LICENSE', 'llm/LICENSE'],
   ['node_modules/@wllama/wllama/esm/index.js', 'llm/index.js'],
   ['node_modules/@wllama/wllama/esm/wasm/wllama.wasm', 'llm/wllama.wasm'],
